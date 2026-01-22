@@ -9,7 +9,6 @@ using SistemaTicketsSoporteMVP.Views.Interfaces;
 
 namespace SistemaTicketsSoporteMVP.Presenters
 {
-    //el presentador actua como intermediario entre la vista y el modelo
     public class TicketPresenter
     {
         private readonly ITicketView _view; //referencia a la vista
@@ -17,7 +16,6 @@ namespace SistemaTicketsSoporteMVP.Presenters
                                                         //de almacenamiento (y esta la del modelo)
         private int _nextId = 1; //contador para asignar ids unicos a los tickets
 
-        //constructor que recibe la vista y el repositorio por inyeccion de dependencias
         public TicketPresenter(ITicketView view, ITicketRepository repository) 
         {
             _view = view; 
@@ -29,7 +27,6 @@ namespace SistemaTicketsSoporteMVP.Presenters
             CargarTickets(); //cargamos los tickets al iniciar el presentador
         }
 
-        //metodo que maneja la creacion de un nuevo ticket, es privado porque solo lo usa el presentador
         private void OnCrearTicket(object sender, System.EventArgs e)
         {
             var titulo = _view.Titulo;
@@ -47,7 +44,6 @@ namespace SistemaTicketsSoporteMVP.Presenters
             CargarTickets();
         }
 
-        //metodo que maneja el cierre de un ticket existente
         private void OnCerrarTicket(object sender, System.EventArgs e)
         {
             var ticket = _repository.GetById(_view.SelectedTicketId); //obtenemos el ticket seleccionado en la vista
@@ -62,7 +58,6 @@ namespace SistemaTicketsSoporteMVP.Presenters
             CargarTickets();
         }
 
-        //metodo que carga los tickets desde el repositorio y los muestra en la vista
         private void CargarTickets()
         {
             var tickets = _repository.GetAll(); //obtenemos todos los tickets del repositorio
@@ -75,7 +70,6 @@ namespace SistemaTicketsSoporteMVP.Presenters
 //si mas adelante queremos cambiar algo de la vista o del modelo, no necesitamos modificar el presentador
 //cumpliendo con la arquitectura MVP 
 
-//Tambien se cumplen los principios SOLID 
 
 //Single R: La clase TicketPresenter tiene una única responsabilidad, que es actuar como intermediario entre la vista y el modelo
 //Abierto/Cerrado: podemos agregar más funcionalidades pero no necesitamos cambiar el código existente para agregarlas 
@@ -84,4 +78,3 @@ namespace SistemaTicketsSoporteMVP.Presenters
 //Inversión de Dependencias: TicketPresenter depende de abstracciones (interfaces) en lugar de concreciones, lo que facilita la prueba y el mantenimiento del código.
 
 
-//el presenter no conoce la implementacion concreta de la vista ni del repositorio, solo interactua con las interfaces

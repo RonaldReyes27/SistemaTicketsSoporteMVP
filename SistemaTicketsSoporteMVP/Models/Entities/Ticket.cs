@@ -12,7 +12,6 @@ namespace SistemaTicketsSoporteMVP.Models.Entities
         Abierto,
         Cerrado
     }
-    //creamos la clase Ticket con las propiedades Id, Titulo, Descripcion y Estado
     public class Ticket
     {
         public int Id { get; }
@@ -21,7 +20,6 @@ namespace SistemaTicketsSoporteMVP.Models.Entities
         public TicketStatus Estado { get; private set; }
 
 
-        //creamos el constructor de la clase Ticket
         public Ticket(int id, string titulo, string descripcion)
         {
             Id = id;
@@ -30,7 +28,6 @@ namespace SistemaTicketsSoporteMVP.Models.Entities
             Estado = TicketStatus.Abierto;
         }
 
-        //creamos el metodo Cerrar que cambia el estado del ticket a Cerrado, por default siempre estara Abierto
         //es un comportamiento propio de la clase Ticket, no involucra logica externa
         public void Cerrar()
         {
@@ -39,7 +36,6 @@ namespace SistemaTicketsSoporteMVP.Models.Entities
     }
 }
 
-//En este archivo, cumplimos los principios SOLID 
 
 //Single R: La clase Ticket tiene una única responsabilidad, que es representar un ticket de soporte con sus propiedades y comportamientos relacionados.
 //Abierto/Cerrado: La clase Ticket está abierta para la extensión (podemos agregar más propiedades o métodos si es necesario) pero cerrada para la modificación (no necesitamos cambiar el código existente para agregar nuevas funcionalidades).

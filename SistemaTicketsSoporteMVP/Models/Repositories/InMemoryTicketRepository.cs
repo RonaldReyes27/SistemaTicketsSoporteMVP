@@ -10,7 +10,6 @@ namespace SistemaTicketsSoporteMVP.Models.Repositories
 {
     public class InMemoryTicketRepository : ITicketRepository
     {
-        //creamos una lista privada de tickets para almacenar los tickets en memoria
         private readonly List<Ticket> _tickets = new List<Ticket>();
 
         //implementamos los metodos de la interfaz ITicketRepository

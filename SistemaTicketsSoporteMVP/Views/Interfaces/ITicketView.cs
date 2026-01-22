@@ -8,7 +8,6 @@ using SistemaTicketsSoporteMVP.Models.Entities;
 
 namespace SistemaTicketsSoporteMVP.Views.Interfaces
 {
-    //interfaz que define como se comunica la vista con el presentador
     public interface ITicketView
     {
         // Datos de entrada
