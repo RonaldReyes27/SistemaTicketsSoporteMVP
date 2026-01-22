@@ -32,4 +32,4 @@ namespace SistemaTicketsSoporteMVP.Models.Repositories
     }
 }
 
-//esta clase solo gestiona almacenamiento en memoria, no crea tickets ni maneja logica de negocio
+//TODO esta clase solo gestiona almacenamiento en memoria, no crea tickets ni maneja logica de negocio
