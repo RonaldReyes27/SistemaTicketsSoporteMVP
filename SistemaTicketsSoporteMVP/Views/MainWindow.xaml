@@ -5,8 +5,208 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SistemaTicketsSoporteMVP"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="MainWindow" Height="750" Width="800">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- ================= CREAR TICKET ================= -->
+        <Border Grid.Row="0"
+                Background="White"
+                CornerRadius="8"
+                Padding="20"
+                Margin="0,0,0,20"
+                BorderBrush="#E0E0E0"
+                BorderThickness="1">
+
+            <StackPanel>
+                <TextBlock Text="Crear Nuevo Ticket"
+                           FontSize="18"
+                           FontWeight="Bold"
+                           Foreground="#333"
+                           Margin="0,0,0,15"/>
+
+                <TextBlock Text="Título:"
+                           FontWeight="SemiBold"
+                           Margin="0,0,0,5"/>
+
+                <TextBox x:Name="TxtTitulo"
+                         Height="35"
+                         Padding="8"
+                         FontSize="13"
+                         BorderBrush="#CCCCCC"
+                         Margin="0,0,0,10"/>
+
+                <TextBlock Text="Descripción:"
+                           FontWeight="SemiBold"
+                           Margin="0,0,0,5"/>
+
+                <TextBox x:Name="TxtDescripcion"
+                         Height="90"
+                         Padding="8"
+                         FontSize="13"
+                         TextWrapping="Wrap"
+                         AcceptsReturn="True"
+                         VerticalScrollBarVisibility="Auto"
+                         BorderBrush="#CCCCCC"
+                         Margin="0,0,0,15"/>
+
+                <Button x:Name="BtnCrearTicket"
+                        Content="Crear Ticket"
+                        Width="130"
+                        Height="38"
+                        Background="#0078D4"
+                        Foreground="White"
+                        FontWeight="SemiBold"
+                        BorderThickness="0"
+                        Cursor="Hand"
+                        HorizontalAlignment="Left"
+                        Click="BtnCrearTicketClick">
+
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="4"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            </StackPanel>
+        </Border>
+
+        <!-- ================= LISTA DE TICKETS ================= -->
+        <Border Grid.Row="1"
+                Background="White"
+                CornerRadius="8"
+                Padding="20"
+                BorderBrush="#E0E0E0"
+                BorderThickness="1">
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0"
+                           Text="Lista de Tickets"
+                           FontSize="18"
+                           FontWeight="Bold"
+                           Foreground="#333"
+                           Margin="0,0,0,15"/>
+
+                <ListBox Grid.Row="1"
+                         x:Name="LstTickets"
+                         BorderBrush="#E0E0E0"
+                         Background="#FAFAFA"
+                         ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Border Background="White"
+                                    CornerRadius="6"
+                                    Padding="15"
+                                    Margin="0,0,0,10"
+                                    BorderBrush="#E0E0E0"
+                                    BorderThickness="1">
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <!-- ID -->
+                                    <TextBlock Grid.Column="0"
+                                               Text="{Binding Id, StringFormat='#{0}'}"
+                                               FontSize="18"
+                                               FontWeight="Bold"
+                                               Foreground="#0078D4"
+                                               Margin="0,0,15,0"
+                                               VerticalAlignment="Center"/>
+
+                                    <!-- Contenido -->
+                                    <StackPanel Grid.Column="1">
+                                        <TextBlock Text="{Binding Titulo}"
+                                                   FontSize="14"
+                                                   FontWeight="Bold"
+                                                   Foreground="#333"
+                                                   TextWrapping="Wrap"/>
+
+                                        <TextBlock Text="{Binding Descripcion}"
+                                                   FontSize="12"
+                                                   Foreground="#666"
+                                                   Margin="0,5,0,0"
+                                                   TextWrapping="Wrap"/>
+                                    </StackPanel>
+
+                                    <!-- Estado -->
+                                    <Border Grid.Column="2"
+                                            CornerRadius="12"
+                                            Padding="10,5"
+                                            VerticalAlignment="Center">
+
+                                        <Border.Style>
+                                            <Style TargetType="Border">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Estado}" Value="Abierto">
+                                                        <Setter Property="Background" Value="#E8F5E9"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Estado}" Value="Cerrado">
+                                                        <Setter Property="Background" Value="#FFEBEE"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Border.Style>
+
+                                        <TextBlock Text="{Binding Estado}"
+                                                   FontWeight="SemiBold"
+                                                   FontSize="12">
+                                            <TextBlock.Style>
+                                                <Style TargetType="TextBlock">
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding Estado}" Value="Abierto">
+                                                            <Setter Property="Foreground" Value="#2E7D32"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding Estado}" Value="Cerrado">
+                                                            <Setter Property="Foreground" Value="#C62828"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </TextBlock.Style>
+                                        </TextBlock>
+                                    </Border>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+        </Border>
+
+        <!-- ================= CERRAR TICKET ================= -->
+        <Button Grid.Row="2"
+                x:Name="BtnCerrarTicket"
+                Content="Cerrar Ticket Seleccionado"
+                Width="200"
+                Height="42"
+                Background="#D32F2F"
+                Foreground="White"
+                FontWeight="SemiBold"
+                BorderThickness="0"
+                Cursor="Hand"
+                Margin="0,20,0,0"
+                HorizontalAlignment="Center"
+                Click="BtnCerrarTicketClick">
+
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="4"/>
+                </Style>
+            </Button.Resources>
+        </Button>
 
     </Grid>
 </Window>
